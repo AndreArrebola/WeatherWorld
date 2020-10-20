@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Ambient.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/grassgrounds.tres" type="TileSet" id=2]
@@ -11,6 +11,14 @@
 [ext_resource path="res://rain1.ogg" type="AudioStream" id=9]
 [ext_resource path="res://rain2.ogg" type="AudioStream" id=10]
 [ext_resource path="res://dogicapixel.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://textfont.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Sprites/Weather Icon Set/sunnyWeather.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 2
@@ -18,19 +26,24 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 11 )
 
-[sub_resource type="DynamicFont" id=3]
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 11 )
-
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 12.0
 } ]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.329412, 0.545098, 0.52549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+border_blend = true
 
 [node name="Ambient" type="Node2D"]
 script = ExtResource( 1 )
@@ -50,7 +63,7 @@ __meta__ = {
 [node name="WeatherRequest" type="HTTPRequest" parent="."]
 
 [node name="WeatherIcon" type="Sprite" parent="."]
-position = Vector2( 180.395, 46.3791 )
+position = Vector2( 390.885, 45.1899 )
 texture = ExtResource( 3 )
 
 [node name="RainWeak" type="AudioStreamPlayer" parent="."]
@@ -62,22 +75,22 @@ stream = ExtResource( 9 )
 volume_db = -13.127
 
 [node name="CityLabel" type="Label" parent="."]
-margin_left = 260.3
-margin_top = 22.6202
-margin_right = 340.3
-margin_bottom = 41.6202
-custom_fonts/font = SubResource( 2 )
+margin_left = 136.622
+margin_top = 17.8634
+margin_right = 216.622
+margin_bottom = 36.8634
+custom_fonts/font = SubResource( 1 )
 text = "Cidade"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TempLabel" type="Label" parent="."]
-margin_left = 420.481
-margin_top = 22.6202
-margin_right = 478.481
-margin_bottom = 41.6202
-custom_fonts/font = SubResource( 3 )
+margin_left = 451.4
+margin_top = 21.431
+margin_right = 509.4
+margin_bottom = 40.431
+custom_fonts/font = SubResource( 2 )
 text = "0° C"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,23 +103,24 @@ position = Vector2( 126.758, 164.527 )
 [node name="Rain1" type="AnimatedSprite" parent="Rain"]
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 z_index = -1
-frames = SubResource( 1 )
-frame = 1
+frames = SubResource( 3 )
+frame = 2
 playing = true
 
 [node name="Rain2" type="AnimatedSprite" parent="Rain"]
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 position = Vector2( 252.285, 1.33484 )
 z_index = -1
-frames = SubResource( 1 )
-frame = 1
+frames = SubResource( 3 )
+frame = 2
 playing = true
 
 [node name="Rain3" type="AnimatedSprite" parent="Rain"]
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 position = Vector2( 750.876, -129.581 )
 z_index = -1
-frames = SubResource( 1 )
+frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( -246.306, 129.581 )
 
@@ -114,7 +128,8 @@ offset = Vector2( -246.306, 129.581 )
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 position = Vector2( 247.641, -363.178 )
 z_index = -1
-frames = SubResource( 1 )
+frames = SubResource( 3 )
+frame = 1
 playing = true
 offset = Vector2( -246.306, 129.581 )
 
@@ -122,8 +137,7 @@ offset = Vector2( -246.306, 129.581 )
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 position = Vector2( 497.256, -365.848 )
 z_index = -1
-frames = SubResource( 1 )
-frame = 3
+frames = SubResource( 3 )
 playing = true
 offset = Vector2( -246.306, 129.581 )
 
@@ -131,8 +145,7 @@ offset = Vector2( -246.306, 129.581 )
 modulate = Color( 0.54902, 0.54902, 0.54902, 0.756863 )
 position = Vector2( 753.546, -367.183 )
 z_index = -1
-frames = SubResource( 1 )
-frame = 3
+frames = SubResource( 3 )
 playing = true
 offset = Vector2( -246.306, 129.581 )
 
@@ -145,3 +158,47 @@ tile_data = PoolIntArray( 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
+
+[node name="TypeCode" type="Panel" parent="."]
+margin_left = 120.946
+margin_top = 2.18921
+margin_right = 516.946
+margin_bottom = 135.189
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button GO" type="Button" parent="TypeCode"]
+margin_left = 268.92
+margin_top = 66.6489
+margin_right = 310.92
+margin_bottom = 103.649
+icon = ExtResource( 13 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Label" parent="TypeCode"]
+margin_left = 67.7848
+margin_top = 15.4597
+margin_right = 307.785
+margin_bottom = 31.4597
+custom_fonts/font = ExtResource( 12 )
+text = "Digite o código"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="TypeCode"]
+margin_left = 64.2971
+margin_top = 65.0
+margin_right = 247.297
+margin_bottom = 103.0
+custom_styles/normal = SubResource( 4 )
+custom_colors/font_color = Color( 0.054902, 0.054902, 0.054902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="TypeCode/Button GO" to="." method="_on_Button_GO_pressed"]

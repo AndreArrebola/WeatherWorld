@@ -29,8 +29,8 @@ func _ready():
 	pass # Replace with function body.
 
 func input(delta):
-	if(Input.is_action_just_released("ui_accept")):
-		$WeatherRequest.request("https://api.hgbrasil.com/weather?fields=only_results,temp,city_name,condition_slug&key=de918127&user_ip=remote")
+	pass
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,13 +42,21 @@ func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	WIcon.texture = load("res://Sprites/Weather Icon Set/" + climateicons[json.result.condition_slug] + ".png")
 	BGTex.texture = load("res://Sprites/bgs/" + climatebgday[json.result.condition_slug] + ".png")
-	if (climatebgday[json.result.condition_slug] == "rain" or climatebgday[json.result.condition_slug] == "storm"):
+	if (json.result.condition_slug == "rain" or json.result.condition_slug == "storm"):
 		$Rain.set_visible(true)
-	if (climatebgday[json.result.condition_slug] == "rain"):
+	if (json.result.condition_slug == "rain"):
 		$RainWeak.play()
-	elif (climatebgday[json.result.condition_slug] == "storm"):
+	elif (json.result.condition_slug == "storm"):
 		$RainStrong.play()
 
-
+	$TypeCode.visible = false
 	CLabel.text = json.result.city_name
 	TLabel.text = str(json.result.temp) + "° C"
+
+
+func _on_Button_GO_pressed():
+	var cityid = $TypeCode/LineEdit.text
+	cityid = cityid.replace(" ", "%20")
+	print (cityid)
+	$WeatherRequest.request("https://api.hgbrasil.com/weather?fields=only_results,temp,city_name,condition_slug&key=de918127&city_name=" + cityid)
+	pass # Replace with function body.
